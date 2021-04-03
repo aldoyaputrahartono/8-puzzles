@@ -17,11 +17,13 @@ bool cek(vector<int> tmp, vector<int> goal){
 
 //heuristik dengan manhattan distance
 int manhattan(vector<int> state, vector<int> goal){
-	int res = 0;
+	int res = 0, idx;
 	for(int i=0;i<9;i++){
 		if(state[i]==0) continue;
-		int dx = abs(state[i]%3 - goal[i]%3);
-		int dy = abs(state[i]/3 - goal[i]/3);
+		for(idx=0; idx<9; idx++)
+			if(state[i]==goal[idx]) break;
+		int dx = abs(i%3 - idx%3);
+		int dy = abs(i/3 - idx/3);
 		res += dx + dy;
 	}
 	return res;
@@ -182,24 +184,24 @@ int main(){
 Greedy Best First Search
 2 8 3 1 6 4 7 0 5
 1 2 3 8 0 4 7 6 5
-Waktu Proses (s) : 0.031
-Pencarian selesai dalam 11 langkah
-Minimum langkah dari state ke goal: 9
+Waktu Proses (s) : 0.016
+Pencarian selesai dalam 5 langkah
+Minimum langkah dari state ke goal: 5
 7 2 4 5 0 6 8 3 1
 0 1 2 3 4 5 6 7 8
-Waktu Proses (s) : 0.469
+Waktu Proses (s) : 0.500
 Pencarian selesai dalam 427 langkah
 Minimum langkah dari state ke goal: 60
 
 A* Search
 2 8 3 1 6 4 7 0 5
 1 2 3 8 0 4 7 6 5
-Waktu Proses (s) : 0.031
-Pencarian selesai dalam 11 langkah
+Waktu Proses (s) : 0.015
+Pencarian selesai dalam 5 langkah
 Minimum langkah dari state ke goal: 5
 7 2 4 5 0 6 8 3 1
 0 1 2 3 4 5 6 7 8
-Waktu Proses (s) : 5.092
+Waktu Proses (s) : 4.530
 Pencarian selesai dalam 4085 langkah
 Minimum langkah dari state ke goal: 26
 
@@ -217,5 +219,14 @@ testcase lain
 1 2 3 4 5 6 7 8 0
 
 6 8 0 3 1 2 4 7 5
+1 2 3 4 5 6 7 8 0
+
+3 1 2 5 0 6 8 4 7
+1 2 3 4 5 6 7 8 0
+
+0 5 7 8 2 3 1 4 6
+1 2 3 4 5 6 7 8 0
+
+7 4 3 5 6 1 0 8 2
 1 2 3 4 5 6 7 8 0
 */
